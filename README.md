@@ -7,5 +7,6 @@ For administrators, MilkyWay offers a robust control panel to efficiently manage
 MilkyWay is your one-stop solution for connecting customers to fresh dairy products while enabling dairy businesses to streamline their operations. It’s all about delivering quality, convenience, and efficiency in every drop.
 
 MilkyWay – Where freshness meets technology!
-![image](https://github.com/user-attachments/assets/785b0f7a-1b48-4205-a25e-0b861a36ab09)
+![image](https://github.com/user-attachments/assets/1c7ba928-f00b-4503-b974-398ab9e41858)
+
 
