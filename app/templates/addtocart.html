@@ -1,0 +1,238 @@
+{##}
+{#{% extends 'base.html' %}#}
+{#{% load static %}#}
+{#{% block title %}Shopping Cart{% endblock title %}#}
+{#{% block content %}#}
+{#<div class="container my-5">#}
+{#  <div class="row">#}
+{#    {% if cart %}#}
+{#    <!-- Display Cart Items -->#}
+{#    <h1 class="text-center mb-5">Shopping Cart</h1>#}
+{#    <div class="col-sm-8">#}
+{#      <div class="card">#}
+{#        <div class="card-body">#}
+{#          <h3>Cart</h3>#}
+{##}
+{#          {% for item in cart %}#}
+{#          <div class="row mb-3" id="cart-item-{{ item.product.id }}">#}
+{#            <div class="col-sm-3 text-center align-self-center">#}
+{#              <img src="{{ item.product.product_image.url }}" alt="{{ item.product.title }}"#}
+{#                class="img-thumbnail shadow-sm" height="150" width="150" />#}
+{#            </div>#}
+{#            <div class="col-sm-9">#}
+{#              <h5>{{ item.product.title }}</h5>#}
+{#              <p class="mb-2 text-muted small">{{ item.product.description }}</p>#}
+{#              <div>#}
+{#                <label for="quantity">Quantity:</label>#}
+{#                <a class="minus-cart btn btn-secondary" pid="{{ item.product.id }}" href="javascript:void(0);">#}
+{#                  <i class="fas fa-minus-square fa-lg"></i>#}
+{#                </a>#}
+{#                <span id="quantity-{{ item.product.id }}">{{ item.quantity }}</span>#}
+{#                <a class="plus-cart btn btn-secondary" pid="{{ item.product.id }}" href="javascript:void(0);">#}
+{#                  <i class="fas fa-plus-square fa-lg"></i>#}
+{#                </a>#}
+{#              </div>#}
+{#              <div class="d-flex justify-content-between mt-2">#}
+{#                <a href="#" class="remove-cart btn btn-sm btn-danger" pid="{{ item.product.id }}">#}
+{#                  Remove Item#}
+{#                </a>#}
+{#                <p class="mb-0">#}
+{#                  <span><strong>Ksh. {{ item.product.discounted_price }}</strong></span>#}
+{#                </p>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div>#}
+{#          {% endfor %}#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{#    <div class="col-sm-4">#}
+{#      <div class="card">#}
+{#        <div class="card-body">#}
+{#          <h3>Total Amount</h3>#}
+{#          <ul class="list-group">#}
+{#            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">#}
+{#              Amount#}
+{#              <span id="amount">Ksh. {{ amount }}</span>#}
+{#            </li>#}
+{#            <li class="list-group-item d-flex justify-content-between align-items-center px-0">#}
+{#              Shipping#}
+{#              <span>Ksh. 40.00</span>#}
+{#            </li>#}
+{#            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">#}
+{#              <strong>Total</strong>#}
+{#              <span id="total"><strong>Ksh. {{ total }}</strong></span>#}
+{#            </li>#}
+{#          </ul>#}
+{#          <a href="{% url 'checkout' %}" class="btn btn-success btn-lg w-100">Proceed to Checkout</a>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{#    {% else %}#}
+{#    <!-- Display Empty Cart Message -->#}
+{#    <div class="col-12 text-center mt-5">#}
+{#      <h3>Your cart is empty!</h3>#}
+{#      <p><a href="{% url 'product-list' %}" class="btn btn-primary mt-3">Continue Shopping</a></p>#}
+{#    </div>#}
+{#    {% endif %}#}
+{#  </div>#}
+{#</div>#}
+{#    <script src="{% static 'js/cart.js' %}"></script>#}
+{#{% endblock content %}#}
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Shopping Cart{% endblock title %}
+{% block content %}
+<div class="container my-5">
+  <div class="row">
+    {% if cart %}
+    <!-- Display Cart Items -->
+    <h1 class="text-center mb-5">Shopping Cart</h1>
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+          <h3>Cart</h3>
+
+          {% for item in cart %}
+          <div class="row mb-3" id="cart-item-{{ item.product.id }}">
+            <div class="col-sm-3 text-center align-self-center">
+              <img src="{{ item.product.product_image.url }}" alt="{{ item.product.title }}"
+                class="img-thumbnail shadow-sm" height="150" width="150" />
+            </div>
+            <div class="col-sm-9">
+              <h5>{{ item.product.title }}</h5>
+              <p class="mb-2 text-muted small">{{ item.product.description }}</p>
+              <div>
+                <label for="quantity">Quantity:</label>
+                <a class="minus-cart btn btn-secondary" data-pid="{{ item.product.id }}" href="javascript:void(0);">
+                  <i class="fas fa-minus-square fa-lg"></i>
+                </a>
+                <span id="quantity-{{ item.product.id }}">{{ item.quantity }}</span>
+                <a class="plus-cart btn btn-secondary" data-pid="{{ item.product.id }}" href="javascript:void(0);">
+                  <i class="fas fa-plus-square fa-lg"></i>
+                </a>
+              </div>
+              <div class="d-flex justify-content-between mt-2">
+                <a href="javascript:void(0);" class="remove-cart btn btn-sm btn-danger" data-pid="{{ item.product.id }}">
+                  Remove Item
+                </a>
+                <p class="mb-0">
+                 <span><strong>Ksh. {{ item.product.discounted_price }}</strong></span>
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <h3>Total Amount</h3>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+              Amount
+              <span id="amount">Ksh. {{ amount }}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+              Shipping
+              <span>Ksh. 40.00</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+              <strong>Total</strong>
+              <span id="total"><strong>Ksh. {{ total }}</strong></span>
+            </li>
+          </ul>
+{#          <a href="{% url 'checkout' %}" class="btn btn-success btn-lg w-100">Proceed to order</a>#}
+            <form action="{% url 'checkout' %}" method="POST">
+  {% csrf_token %}
+  <input type="hidden" name="amount" value="{{ total }}" />
+  <input type="text" name="phone" placeholder="Enter Phone Number" required />
+  <button type="submit" class="btn btn-success">Proceed to Checkout</button>
+</form>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <!-- Display Empty Cart Message -->
+    <div class="col-12 text-center mt-5">
+      <h3>Your cart is empty!</h3>
+      <p><a href="#" class="btn btn-primary mt-3">Continue Shopping</a></p>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Increase quantity
+  document.querySelectorAll(".plus-cart").forEach(function (button) {
+    button.addEventListener("click", function () {
+      let pid = this.getAttribute("data-pid");
+      updateCartQuantity(pid, "plus");
+    });
+  });
+
+  // Decrease quantity
+  document.querySelectorAll(".minus-cart").forEach(function (button) {
+    button.addEventListener("click", function () {
+      let pid = this.getAttribute("data-pid");
+      updateCartQuantity(pid, "minus");
+    });
+  });
+
+  // Remove item from cart
+  document.querySelectorAll(".remove-cart").forEach(function (button) {
+    button.addEventListener("click", function () {
+      let pid = this.getAttribute("data-pid");
+      removeCartItem(pid);
+    });
+  });
+
+  // Update quantity via AJAX
+  function updateCartQuantity(pid, action) {
+    fetch(`/update-cart/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": "{{ csrf_token }}"
+      },
+      body: JSON.stringify({ product_id: pid, action: action }) // Fixed this line
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById(`quantity-${pid}`).innerText = data.new_quantity;
+          document.getElementById(`item-total-${pid}`).innerText = data.item_total;
+          document.getElementById("amount").innerText = `Ksh. ${data.amount}`;
+          document.getElementById("total").innerText = `Ksh. ${data.total}`;
+        }
+      })
+      .catch(error => console.error("Error updating cart:", error)); // Added error handling
+  }
+
+  // Remove item via AJAX
+  function removeCartItem(pid) {
+    fetch(`/remove-cart/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": "{{ csrf_token }}"
+      },
+      body: JSON.stringify({ product_id: pid })
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById(`cart-item-${pid}`).remove();
+          document.getElementById("amount").innerText = `Ksh. ${data.amount}`;
+          document.getElementById("total").innerText = `Ksh. ${data.total}`;
+        }
+      })
+      .catch(error => console.error("Error removing item:", error)); // Added error handling
+  }
+});
+</script>
+{% endblock content %}

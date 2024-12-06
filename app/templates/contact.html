@@ -1,0 +1,46 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About{% endblock title %}
+
+{% block banner_slider %}
+<div class="static-banner">
+    <div class="overlay-content">
+        <h2 class="text-center text-black fw-bold">Contact Us</h2>
+        <p class="fs-5 text-black">Address: P.O. BOX 55302, Nairobi</p>
+        <p class="fs-5 text-black">Contact: +254 742048713</p>
+        <p class="fs-5 text-black">Email: andrewmogambi12.com</p>
+    </div>
+</div>
+
+<style>
+    /* Static Background */
+    .static-banner {
+        background-image: url("{% static 'images/banner/b4.jpg' %}"); /* Replace with your desired image */
+        background-size: cover; /* Ensures the image covers the entire area */
+        background-position: center; /* Centers the image */
+        background-repeat: no-repeat; /* Prevents tiling */
+        height: 100vh; /* Full height of the viewport */
+        display: flex; /* Enables centering of content */
+        align-items: center; /* Vertically centers the content */
+        justify-content: center; /* Horizontally centers the content */
+    }
+
+    /* Text Overlay Content */
+    .overlay-content {
+        background: rgba(255, 255, 255, 0.8); /* Semi-transparent background for the text */
+        padding: 20px; /* Adds spacing around the text */
+        border-radius: 10px; /* Rounded corners for the overlay */
+        text-align: center; /* Centers the text */
+        max-width: 600px; /* Restricts the width of the text box */
+    }
+
+    .text-black {
+        color: black; /* Ensures the text is black */
+    }
+</style>
+{% endblock banner_slider %}
+
+
+
+

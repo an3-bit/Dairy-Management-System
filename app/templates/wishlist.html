@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Wishlist{% endblock title %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Your Wishlist</h1>
+    <div class="row">
+        {% if wishlist_items %}
+            {% for item in wishlist_items %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ item.product.image.url }}" class="card-img-top" alt="{{ item.product.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.product.name }}</h5>
+                            <p class="card-text">Price: Ksh.{{ item.product.price }}</p>
+                            <p class="card-text">Category: {{ item.product.category }}</p>
+                            <div class="d-flex justify-content-between">
+                                <!-- Add to Cart Button -->
+                                <form action="{% url 'add_to_cart' item.product.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-success btn-sm">Add to Cart</button>
+                                </form>
+                                <!-- Remove from Wishlist Button -->
+                                <form action="{% url 'remove_from_wishlist' item.product.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-danger btn-sm">Remove</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <p class="text-center text-muted">Your wishlist is empty. Browse our <a href="#">products</a> to add items to your wishlist!</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}
